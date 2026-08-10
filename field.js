@@ -1,18 +1,15 @@
-// Problem 3 —Trending Hashtag Counter
-const countHashtags = (caption) => {
-    if (typeof caption !== 'string') {
+// Problem 4 — Bonus Score Calculator
+const bonusScore = (scores) => {
+    if (!Array.isArray(scores) || scores.length === 0) {
         return "Invalid"
     }
 
-    const words = caption.split(' ');
-    const hashtagCounts = words.filter(word => word.startsWith('#'));
-    let longestTag = '';
-    hashtagCounts.forEach(hashtagCount => {
-        const tag = hashtagCount.slice(1);
-        if (tag.length > longestTag.length) {
-            longestTag = tag
+    for (const score of scores) {
+        if (typeof score !== 'number') {
+            return "Invalid";
         }
-    });
+    }
 
-    return { hashtagCount: hashtagCounts.length, longestTag: longestTag }
+    const bonusScore = scores.map(score => score + 10);
+    return bonusScore.reduce((total, value) => total + value, 0);
 }
