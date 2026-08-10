@@ -1,6 +1,6 @@
 // Problem 1 — Student Introduction Generator
 const studentIntroduction = (student) => {
-    if (typeof student !== 'object' || Array.isArray(student)) {
+    if (typeof student !== 'object' || Object.keys(student).length === 0 || Array.isArray(student)) {
         return "Invalid"
     }
 
@@ -26,11 +26,11 @@ const filterActiveUsers = (users) => {
 
     for (const user of users) {
         if (!user.hasOwnProperty('isActive')) {
-            return "Invalid";
+            return "Invalid"
         }
     }
 
-    return users.filter(user => user.isActive === true);
+    return users.filter(user => user.isActive === true)
 }
 
 
@@ -44,13 +44,12 @@ const countHashtags = (caption) => {
     const words = caption.split(' ');
     const hashtagCounts = words.filter(word => word.startsWith('#'));
     let longestTag = '';
-    hashtagCounts.forEach(hashtagCount => {
+    for (const hashtagCount of hashtagCounts) {
         const tag = hashtagCount.slice(1);
         if (tag.length > longestTag.length) {
-            longestTag = tag
+            longestTag = tag;
         }
-    });
-
+    }
     return { hashtagCount: hashtagCounts.length, longestTag: longestTag }
 }
 
@@ -64,28 +63,29 @@ const bonusScore = (scores) => {
 
     for (const score of scores) {
         if (typeof score !== 'number') {
-            return "Invalid";
+            return "Invalid"
         }
     }
 
-    const bonusScore = scores.map(score => score + 10);
-    return bonusScore.reduce((total, value) => total + value, 0);
+    return scores.map(score => score + 10)
+        .reduce((total, value) => total + value, 0)
 }
 
 
 
 // Problem 5 — Debugging Challenge: AI Leaderboard Generator
 /* Find and fix every bug. Do not change the function name. */
-function generateLeaderboard(students) {
+const generateLeaderboard = (students) => {
     if (!Array.isArray(students)) {
         return "Invalid";
     }
+
     if (students.length === 0) {
         return "Invalid";
     }
 
     for (const student of students) {
-        const keys = Object.keys(student);
+        const keys = Object.keys(student)
         if (!keys.includes('name') ||
             !keys.includes('score') ||
             typeof student.name !== 'string' ||
