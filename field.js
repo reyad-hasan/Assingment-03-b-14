@@ -1,14 +1,18 @@
-// Problem 2 — Active User Filter
-const filterActiveUsers = (users) => {
-    if (!Array.isArray(users) || users.length === 0) {
+// Problem 3 —Trending Hashtag Counter
+const countHashtags = (caption) => {
+    if (typeof caption !== 'string') {
         return "Invalid"
     }
 
-    if (users.some(user => !('isActive' in user))) {
-        return "Invalid"
-    }
-    return users.filter(user => user.isActive === true);
+    const words = caption.split(' ');
+    const hashtagCounts = words.filter(word => word.startsWith('#'));
+    let longestTag = '';
+    hashtagCounts.forEach(hashtagCount => {
+        const tag = hashtagCount.slice(1);
+        if (tag.length > longestTag.length) {
+            longestTag = tag
+        }
+    });
+
+    return { hashtagCount: hashtagCounts.length, longestTag: longestTag }
 }
-
-const result = [{name:"A", isActive:true},{name:"B", isActive:false}]
-console.log(filterActiveUsers(result));
