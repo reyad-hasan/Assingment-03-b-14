@@ -15,3 +15,18 @@ const studentIntroduction = (student) => {
     const { name, age, course } = student;
     return `My name is ${name}. I am ${age} years old. I am learning ${course}.`
 }
+
+
+
+// Problem 2 — Active User Filter
+const filterActiveUsers = (users) => {
+    if (!Array.isArray(users) || users.length === 0) {
+        return "Invalid"
+    }
+
+    if (users.some(user => !('isActive' in user))) {
+        return "Invalid"
+    }
+
+    return users.filter(user => user.isActive === true);
+}
